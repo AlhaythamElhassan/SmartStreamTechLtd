@@ -1,15 +1,22 @@
-package services.files;
+package main.java.services.files;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import domain.*;
+
+import main.java.domain.*;
  
 
 public class ReaderWriter {
 	
 	private String fileName;
+
+
+
+	public ReaderWriter(String inputFile) {
+		setFileName(inputFile);
+	}
 
 
 
@@ -29,8 +36,8 @@ public class ReaderWriter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ReaderWriter fileReaderWriter = new ReaderWriter();
-		fileReaderWriter.setFileName("RequirementsAndgivenData/Person.data");
+		String inputDataFile = "RequirementsAndgivenData/Person.data";
+		ReaderWriter fileReaderWriter = new ReaderWriter(inputDataFile);
 		ArrayList<Person> personRecords = fileReaderWriter.readFile();
 		for (Person person: personRecords)
 			System.out.println(person.toString());
@@ -41,7 +48,6 @@ public class ReaderWriter {
 	 * @return 
 	 * @return ArrayList of records found in the file
 	 */
-	@SuppressWarnings("resource")
 	public ArrayList<Person> readFile() {
 		ArrayList<Person> records = new ArrayList<Person>();
 		Scanner in;
@@ -61,6 +67,8 @@ public class ReaderWriter {
 					records.add(person);
 				}
 			}
+			// close Scanner 
+			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Error reading File " + this.fileName);
 			e.printStackTrace();

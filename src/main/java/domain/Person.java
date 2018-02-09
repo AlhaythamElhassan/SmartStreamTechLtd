@@ -1,4 +1,4 @@
-package domain;
+package main.java.domain;
 
 public class Person {
 	int Person_ID;
