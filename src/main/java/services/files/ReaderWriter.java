@@ -36,7 +36,7 @@ public class ReaderWriter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String inputDataFile = "RequirementsAndgivenData/Person.data";
+		String inputDataFile = "src/main/resources/Person.data";
 		ReaderWriter fileReaderWriter = new ReaderWriter(inputDataFile);
 		ArrayList<Person> personRecords = fileReaderWriter.readFile();
 		for (Person person: personRecords)

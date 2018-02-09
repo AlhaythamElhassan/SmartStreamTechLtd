@@ -11,7 +11,7 @@ public class OrdersApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String dataInputFile = "RequirementsAndgivenData/Person.data";
+		String dataInputFile = "src/main/resources/Person.data";
 		ReaderWriter fileReaderWriter = new ReaderWriter(dataInputFile);
 		ArrayList<Person> personRecords = fileReaderWriter.readFile();
 		for (Person person: personRecords)

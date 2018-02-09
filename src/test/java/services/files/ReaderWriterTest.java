@@ -24,7 +24,7 @@ public class ReaderWriterTest {
 		// The return type is an ArrayList of Person
 		ArrayList<Person> outputRecords = new ArrayList<Person>();
 		// The input is a file name 
-		String inputFile = "RequirementsAndgivenData/Person.data";
+		String inputFile = "src/main/resources/Person.data";
 		// instantiate a ReadWriter object using inputFile String
 		ReaderWriter readerWriter = new ReaderWriter(inputFile);
 		outputRecords = readerWriter.readFile();
