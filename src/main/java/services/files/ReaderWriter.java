@@ -56,16 +56,9 @@ public class ReaderWriter {
 					new FileInputStream(this.fileName), "UTF-8");
 			in.nextLine();
 			while(in.hasNext()){
-				String line = in.nextLine();
-				String[] fields = line.split("\\,");
-				if(fields.length > 1){
-					Person person = new Person(Integer.parseInt(fields[0]),
-							fields[1],
-							fields[2],
-							fields[3],
-							fields[4]);
-					records.add(person);
-				}
+				Person personRecord = mapLineToRecord(in.nextLine());
+				if (personRecord != null)
+					records.add(personRecord);
 			}
 			// close Scanner 
 			in.close();
@@ -74,6 +67,19 @@ public class ReaderWriter {
 			e.printStackTrace();
 		}
 		return records;
+	}
+
+	private Person mapLineToRecord(String line) {
+		String[] fields = line.split("\\,");
+		if(fields.length > 1){
+			Person person = new Person(Integer.parseInt(fields[0]),
+					fields[1],
+					fields[2],
+					fields[3],
+					fields[4]);
+			return person;
+		}
+		return null;
 	}
 }
 
