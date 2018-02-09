@@ -10,3 +10,5 @@
 # Run Test cases from command line
 ` java -jar src/test/libs/junit-platform-console-standalone-1.0.3.jar -d src/test/` 
 from project root directory.
+#TODO 
+### Unit testing the domain objects

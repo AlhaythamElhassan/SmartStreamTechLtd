@@ -15,7 +15,14 @@ public class ReaderWriter {
 
 
 	public ReaderWriter(String inputFile) {
+		super();
 		setFileName(inputFile);
+	}
+
+
+
+	public ReaderWriter() {
+		super();
 	}
 
 
@@ -69,7 +76,7 @@ public class ReaderWriter {
 		return records;
 	}
 
-	private Person mapLineToRecord(String line) {
+	public Person mapLineToRecord(String line) {
 		String[] fields = line.split("\\,");
 		if(fields.length > 1){
 			Person person = new Person(Integer.parseInt(fields[0]),
