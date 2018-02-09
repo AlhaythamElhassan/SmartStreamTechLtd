@@ -1,5 +1,6 @@
 package test.java.services.files;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 
@@ -7,8 +8,9 @@ import main.java.domain.Person;
 import main.java.services.files.ReaderWriter;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
-
+@DisplayName(value = "Testing ReadWriter Unit")
 public class ReaderWriterTest {
 	/**
 	 * This Test is a Test case that if a ReaderWriter object is 
@@ -18,7 +20,7 @@ public class ReaderWriterTest {
 	 *  of type Person that is not null.
 	 */
 	@Test
-	public void testreadFile() {
+	public void testreadFileReturnNotNullObject() {
 		// The return type is an ArrayList of Person
 		ArrayList<Person> outputRecords = new ArrayList<Person>();
 		// The input is a file name 
@@ -28,12 +30,8 @@ public class ReaderWriterTest {
 		outputRecords = readerWriter.readFile();
 		// now application have to assert that the output an
 		// ArrayList that is not null 
-		System.out.println(outputRecords.size());
+		assertNotNull(outputRecords);
+		assertEquals(outputRecords.get(0).getFirst_Name(), "Ola");
 	}
 	
-	@Test
-	public void myFirstTest() {
-		assertEquals(2, 1 + 1);
-	}
-
 }
