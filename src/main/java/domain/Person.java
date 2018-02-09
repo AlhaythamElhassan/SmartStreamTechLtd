@@ -1,4 +1,4 @@
-package domain;
+package main.java.domain;
 
 public class Person {
 	int Person_ID;
@@ -42,15 +42,14 @@ public class Person {
 		City = city;
 	}
 	public String toString(){
-		return ("Person ID " +
-				getPerson_ID() +
-				", First Name " + 
+		return ( getPerson_ID() +
+				"," + 
 				getFirst_Name() +
-				", Last Name " +
+				"," +
 				getLast_Name() +
-				", Street " +
+				"," +
 				getStreet() +
-				", City " + 
+				"," + 
 				getCity());
 	}
 	/**

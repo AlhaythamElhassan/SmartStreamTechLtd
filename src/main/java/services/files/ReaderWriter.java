@@ -1,15 +1,29 @@
-package services.files;
+package main.java.services.files;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import domain.*;
+
+import main.java.domain.*;
  
 
 public class ReaderWriter {
 	
 	private String fileName;
+
+
+
+	public ReaderWriter(String inputFile) {
+		super();
+		setFileName(inputFile);
+	}
+
+
+
+	public ReaderWriter() {
+		super();
+	}
 
 
 
@@ -29,8 +43,8 @@ public class ReaderWriter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ReaderWriter fileReaderWriter = new ReaderWriter();
-		fileReaderWriter.setFileName("RequirementsAndgivenData/Person.data");
+		String inputDataFile = "src/main/resources/Person.data";
+		ReaderWriter fileReaderWriter = new ReaderWriter(inputDataFile);
 		ArrayList<Person> personRecords = fileReaderWriter.readFile();
 		for (Person person: personRecords)
 			System.out.println(person.toString());
@@ -41,7 +55,6 @@ public class ReaderWriter {
 	 * @return 
 	 * @return ArrayList of records found in the file
 	 */
-	@SuppressWarnings("resource")
 	public ArrayList<Person> readFile() {
 		ArrayList<Person> records = new ArrayList<Person>();
 		Scanner in;
@@ -50,22 +63,30 @@ public class ReaderWriter {
 					new FileInputStream(this.fileName), "UTF-8");
 			in.nextLine();
 			while(in.hasNext()){
-				String line = in.nextLine();
-				String[] fields = line.split("\\,");
-				if(fields.length > 1){
-					Person person = new Person(Integer.parseInt(fields[0]),
-							fields[1],
-							fields[2],
-							fields[3],
-							fields[4]);
-					records.add(person);
-				}
+				Person personRecord = mapLineToRecord(in.nextLine());
+				if (personRecord != null)
+					records.add(personRecord);
 			}
+			// close Scanner 
+			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Error reading File " + this.fileName);
 			e.printStackTrace();
 		}
 		return records;
+	}
+
+	public Person mapLineToRecord(String line) {
+		String[] fields = line.split("\\,");
+		if(fields.length > 1){
+			Person person = new Person(Integer.parseInt(fields[0]),
+					fields[1],
+					fields[2],
+					fields[3],
+					fields[4]);
+			return person;
+		}
+		return null;
 	}
 }
 
