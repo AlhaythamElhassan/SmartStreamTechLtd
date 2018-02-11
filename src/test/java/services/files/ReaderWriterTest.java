@@ -1,14 +1,13 @@
 package test.java.services.files;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
 import main.java.domain.Person;
 import main.java.services.files.ReaderWriter;
-
-import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 
 @DisplayName(value = "Testing ReadWriter Unit")
 public class ReaderWriterTest {
