@@ -58,3 +58,6 @@ local.properties
 .gradle/
 build/
 
+.project
+.classpath
+
