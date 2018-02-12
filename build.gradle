@@ -48,6 +48,10 @@ dependencies {
             'org.junit.platform:junit-platform-launcher:1.0.1',
             'org.junit.platform:junit-platform-runner:1.0.1'
     )
+// https://mvnrepository.com/artifact/org.apache.derby/derbyclient
+compile group: 'org.apache.derby', name: 'derbyclient', version: '10.14.1.0'
+
+    
 }
 // gradle wrapper
 task wrapper(type: Wrapper) {
