@@ -11,12 +11,13 @@ import java.sql.*;
  */
 public class Database {
 	String dbName = "Orders";
-	private String url = "jdbc:postgresql:orders";
-	private String userName = "SamrtStreamt";
-	private String password = "S12345ltd";
+	private String url = "jdbc:derby://localhost:1527/Orders;create=true";
+	private String userName = "app";
+	private String password = "secetet";
 	public static void main(String[] args) {
 		System.out.println("Logging form class database.Database");
-
+		Database ordersDb = new Database();
+		ordersDb.connectToDb();
 	}
 	
 	public void connectToDb() {
@@ -25,20 +26,17 @@ public class Database {
 			dbConn = getConnection(); 
 			try {
 				Statement stat = dbConn.createStatement();
-				stat.executeUpdate("CREATE TABLE Persons ("
-						+ "PersonId INT,"
-						+ "FirstName VARCHAR(255),"
-						+ "LastName VARCHAR(255),"
-						+ "Street VARCHAR(255),"
-						+ "City VARCHAR(255)"
-						+ ");");
+//				stat.execute("USE Orders");
+				stat.execute("create table Persons(Personid int, firstName varchar(20))");
+				
+				//stat.executeUpdate("DROP TABLE Persons");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("SQL exception");
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			//e1.printStackTrace();
 		}
 	}
 /**
@@ -47,7 +45,7 @@ public class Database {
  * @throws SQLException 
  */
 	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(url,userName, password);
+		return DriverManager.getConnection(this.url,this.userName, this.password);
 	}
 
 }
