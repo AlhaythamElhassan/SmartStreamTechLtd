@@ -15,7 +15,8 @@ jar {
     version =  '1.0.0' // first application version
 }
 
-mainClassName = "main.java.application.OrdersApplication"
+//mainClassName = "main.java.application.OrdersApplication"
+mainClassName = "database.Database"
 
 buildscript {
     repositories {
@@ -39,9 +40,7 @@ dependencies {
 	)
     testCompile(
             'org.junit.jupiter:junit-jupiter-api:5.0.1',
-            'junit:junit:4.12'
-            // https://mvnrepository.com/artifact/org.apache.derby/derby
-			'org.apache.derby', name: 'derby', version: '10.14.1.0'
+            'junit:junit:4.12'            
     )
     testRuntime(
             'org.junit.jupiter:junit-jupiter-engine:5.0.1',
@@ -50,7 +49,6 @@ dependencies {
             'org.junit.platform:junit-platform-runner:1.0.1'
     )
 }
-
 // gradle wrapper
 task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
