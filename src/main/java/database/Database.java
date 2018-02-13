@@ -10,7 +10,13 @@ import java.sql.*;
  * message and this statement is one of the test cases
  */
 public class Database {
-	Statement statement; 
+	
+	Statement statement;
+	String dbName = "Orders";
+	private String url = "jdbc:derby://localhost:1527/" + dbName + ";create=true";
+	private String userName = "app";
+	private String password = "secetet";
+	
 	public Statement getStatement() {
 		return statement;
 	}
@@ -50,11 +56,6 @@ public class Database {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	String dbName = "Orders";
-	private String url = "jdbc:derby://localhost:1527/" + dbName + ";create=true";
-	private String userName = "app";
-	private String password = "secetet";
-	
 	
 	public static void main(String[] args) {
 		System.out.println("Logging form class database.Database");
@@ -83,7 +84,7 @@ public class Database {
  * @return the database connection
  * @throws SQLException 
  */
-	private Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(this.url,this.userName, this.password);
 	}
 
