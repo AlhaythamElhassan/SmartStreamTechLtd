@@ -1,9 +1,9 @@
-package main.java.application;
+package application;
 
 import java.util.ArrayList;
 
-import main.java.domain.Person;
-import main.java.services.files.ReaderWriter;
+import domain.Person;
+import services.files.ReaderWriter;
 
 
 public class OrdersApplication {
