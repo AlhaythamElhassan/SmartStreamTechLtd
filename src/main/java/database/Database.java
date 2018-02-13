@@ -17,8 +17,8 @@ public class Database {
 	private String userName = "app";
 	private String password = "secetet";
 	
-	public Statement getStatement() {
-		return statement;
+	public Statement getStatement() throws SQLException {
+		return this.getConnection().createStatement();
 	}
 
 	public void setStatement(Statement statement) {
