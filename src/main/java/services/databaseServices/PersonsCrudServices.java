@@ -1,9 +1,12 @@
 package services.databaseServices;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.Database;
+import domain.Person;
+import services.files.ReaderWriter;
 
 public class PersonsCrudServices implements CrudServices {
 	
@@ -46,13 +49,36 @@ public class PersonsCrudServices implements CrudServices {
 	}
 
 	@Override
-	public boolean interstIntoTable(String tableName, ArrayList<?> records) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean interstIntoTable(String tableName, ArrayList records) {
+		boolean isInserted = false;
+		String sqlOperation = "insert into table " + tableName + " values (?,?,?,?,?)" ;
+	
+			for (Object p : records) {
+				System.out.println(sqlOperation + p.toString() + ")");
+				try {
+					System.out.println("Trying to insert record: " + p.toString());
+//					getDatabase().getConnection().setAutoCommit(false);
+					PreparedStatement insertInto = null; 
+					insertInto = getDatabase().getConnection().prepareStatement(sqlOperation);
+					insertInto.setInt(0, 1);
+					insertInto.setString(1, "a");
+					insertInto.setString(2, "aa");
+					insertInto.setString(3, "aa");
+					insertInto.setString(4, "aa");
+					insertInto.executeUpdate();
+					isInserted = true ;
+				} catch (SQLException e) {
+					isInserted = false;
+					System.out.println("Couldn't insert record " + p.toString());
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Last record insertion status is: " + isInserted);
+		return isInserted;
 	}
 
 	@Override
-	public ArrayList<?> findAll(String tableName) {
+	public ArrayList findAll(String tableName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
