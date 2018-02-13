@@ -16,7 +16,8 @@ jar {
 }
 
 //mainClassName = "main.java.application.OrdersApplication"
-mainClassName = "database.Database"
+//mainClassName = "database.Database"
+mainClassName = "services.databaseServices.PersonsCrudServices"
 
 buildscript {
     repositories {
