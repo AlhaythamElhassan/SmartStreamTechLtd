@@ -59,14 +59,14 @@ task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
 }
 
-task startdb () {
-	 javaexec {
-		  main = '-jar';
-		  args = [
-		  'src/Database/db-derby-10.14.1.0-bin/lib/derbyrun.jar',
-		  'server',
-		  'start'
-		  ]
-	  }
-  }
+//task startdb (dependsOn: jar) {
+	// javaexec {
+		//  main = '-jar';
+		  //args = [
+		  //'src/Database/db-derby-10.14.1.0-bin/lib/derbyrun.jar',
+		  //'server',
+		  //'start'
+		 // ]
+	  //}
+  //}
   
