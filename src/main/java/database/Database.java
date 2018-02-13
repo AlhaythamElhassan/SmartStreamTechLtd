@@ -68,13 +68,14 @@ public class Database {
 			dbConn = getConnection(); 
 			try {
 				this.statement = dbConn.createStatement();
-				Statement stat = dbConn.createStatement();				
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("SQL exception");
+				System.out.println("SQL exception #############");
 			}
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			System.out.println("could not connect to dataase system is exiting ...");
+			System.out.println("Please make sure that the databse server is running");
+			System.exit(0);
 		}
 	}
 /**
