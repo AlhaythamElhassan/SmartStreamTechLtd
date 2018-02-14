@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import database.Database;
 import domain.Person;
 import services.files.ReaderWriter;
@@ -30,9 +32,9 @@ public class PersonsCrudServices implements CrudServices {
 		// connect to the db 
 		services.getDatabase().connectToDb();
 		// get database statement
-		services.createTable("Persons","PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
-		//services.interstIntoTable("Persons", personRecords);
-		services.dropTable("Persons");
+//		services.createTable("Persons","PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
+		services.interstIntoTable("Persons", personRecords);
+//		services.dropTable("Persons");
 		
 		
 	}
@@ -56,29 +58,13 @@ public class PersonsCrudServices implements CrudServices {
 	@Override
 	public boolean interstIntoTable(String tableName, ArrayList records) {
 		boolean isInserted = false;
-		String sqlOperation = "insert into table " + tableName + " values (?,?,?,?,?)" ;
-	
-			for (Object p : records) {
-				System.out.println(sqlOperation + p.toString() + ")");
-				try {
-					System.out.println("Trying to insert record: " + p.toString());
-//					getDatabase().getConnection().setAutoCommit(false);
-					PreparedStatement insertInto = null; 
-					insertInto = getDatabase().getConnection().prepareStatement(sqlOperation);
-					insertInto.setInt(0, 1);
-					insertInto.setString(1, "a");
-					insertInto.setString(2, "aa");
-					insertInto.setString(3, "aa");
-					insertInto.setString(4, "aa");
-					insertInto.executeUpdate();
-					isInserted = true ;
-				} catch (SQLException e) {
-					isInserted = false;
-					System.out.println("Couldn't insert record " + p.toString());
-					e.printStackTrace();
-				}
-			}
-			System.out.println("Last record insertion status is: " + isInserted);
+		try {
+			this.getDatabase().getStatement().execute(null);
+			isInserted = true; 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return isInserted;
 	}
 
