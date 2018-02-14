@@ -32,9 +32,9 @@ public class PersonsCrudServices implements CrudServices {
 		// connect to the db 
 		services.getDatabase().connectToDb();
 		// get database statement
-//		services.createTable("Persons","PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
+		services.createTable("Persons","PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
 		services.interstIntoTable("Persons", personRecords);
-//		services.dropTable("Persons");
+		services.dropTable("Persons");
 		
 		
 	}
@@ -59,15 +59,21 @@ public class PersonsCrudServices implements CrudServices {
 	public boolean interstIntoTable(String tableName, ArrayList records) {
 		boolean isInserted = false;
 		try {
-			System.out.println("Trying to insert a record into table Persons");
-			this.getDatabase().getStatement().execute("insert into"
-					+ " Persons values (4,'firstName','lastName','street','city')");
+			System.out.println("Trying to insert a records into table " + tableName);
+			for(Object record: records) {
+				String sqlOp = "insert into "
+						+ tableName +
+						" values ("
+						+ record.toString()
+						+ ")";
+				this.getDatabase().getStatement().execute(sqlOp);
+			}
 			isInserted = true; 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("record insertion status is " + isInserted);
+		System.out.println("records insertion status is " + isInserted);
 		return isInserted;
 	}
 
