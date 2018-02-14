@@ -1,6 +1,8 @@
 package services.databaseServices;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class PersonsCrudServices implements CrudServices {
 		String inputDataFile = "src/main/resources/Person.data";
 		ReaderWriter fileReaderWriter = new ReaderWriter(inputDataFile);
 		ArrayList<Person> personRecords = fileReaderWriter.readFile();
+		ArrayList<Object> retrievedRecords; 
 		
 		services.setDatabase(new Database());
 		// connect to the db 
@@ -34,6 +37,10 @@ public class PersonsCrudServices implements CrudServices {
 		// get database statement
 		services.createTable("Persons","PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
 		services.interstIntoTable("Persons", personRecords);
+		retrievedRecords = services.findAll("Persons");
+		retrievedRecords.forEach(record -> {
+			System.out.println(record.toString());
+		});
 		services.dropTable("Persons");
 		
 		
@@ -78,9 +85,24 @@ public class PersonsCrudServices implements CrudServices {
 	}
 
 	@Override
-	public ArrayList findAll(String tableName) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Object> findAll(String tableName) {
+		ArrayList<Object> records = new ArrayList<Object>();
+		try {
+			System.out.println("Trying to find all records in table " + tableName);
+			ResultSet resultSet = this.getDatabase().getStatement().executeQuery("select * from " + tableName);
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			int columnCount = metaData.getColumnCount();
+			while(resultSet.next()) {
+				for (int i = 1; i < columnCount; i++) {
+					System.out.println(resultSet.getObject(i));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println();
+		return records;
 	}
 
 	@Override
