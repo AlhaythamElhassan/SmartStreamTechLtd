@@ -59,12 +59,15 @@ public class PersonsCrudServices implements CrudServices {
 	public boolean interstIntoTable(String tableName, ArrayList records) {
 		boolean isInserted = false;
 		try {
-			this.getDatabase().getStatement().execute(null);
+			System.out.println("Trying to insert a record into table Persons");
+			this.getDatabase().getStatement().execute("insert into"
+					+ " Persons values (4,'firstName','lastName','street','city')");
 			isInserted = true; 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("record insertion status is " + isInserted);
 		return isInserted;
 	}
 
