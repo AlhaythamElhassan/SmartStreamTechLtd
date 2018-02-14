@@ -1,13 +1,14 @@
-package test.java.services.files;
+package services.files;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
+
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import main.java.domain.Person;
-import main.java.services.files.ReaderWriter;
+import domain.Person;
 
 @DisplayName(value = "Testing ReadWriter Unit")
 public class ReaderWriterTest {
@@ -34,9 +35,10 @@ public class ReaderWriterTest {
 	@Test
 	public void mapLineToRecordConverstCsvToPersonObject() {
 		String line = "1,Ola,Hansen,Timoteivn,Sandnes";
+		String expectedOutPut = "1,'Ola','Hansen','Timoteivn','Sandnes'";
 		ReaderWriter readerWriter = new ReaderWriter();
 		Person person = readerWriter.mapLineToRecord(line);
-		assertEquals(person.toString(), line);
+		assertEquals(person.toString(), expectedOutPut);
 	}
 	@Test
 	public void testreadFileIsReturningTheRightData() {
@@ -47,9 +49,9 @@ public class ReaderWriterTest {
 		// instantiate a ReadWriter object using inputFile String
 		ReaderWriter readerWriter = new ReaderWriter(inputFile);
 		outputRecords = readerWriter.readFile();
-		assertEquals(outputRecords.get(0).toString(), "1,Ola,Hansen,Timoteivn,Sandnes");
-		assertEquals(outputRecords.get(1).toString(), "2,Tove,Svendson,Borgvn,Stavanger");
-		assertEquals(outputRecords.get(2).toString(), "3,Kari,Pettersen,Storgt,Stavanger");
+		assertEquals(outputRecords.get(0).toString(), "1,'Ola','Hansen','Timoteivn','Sandnes'");
+		assertEquals(outputRecords.get(1).toString(), "2,'Tove','Svendson','Borgvn','Stavanger'");
+		assertEquals(outputRecords.get(2).toString(), "3,'Kari','Pettersen','Storgt','Stavanger'");
 	}
 	@Test
 	public void TestThatsetFileNameIsSettingTheField() {
