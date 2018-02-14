@@ -70,8 +70,7 @@ public class Database {
 			try {
 				this.statement = dbConn.createStatement();
 			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println("SQL exception #############");
+				System.out.println("Internal SQL error");
 			}
 		} catch (SQLException e1) {
 			System.out.println("could not connect to dataase system is exiting ...");
