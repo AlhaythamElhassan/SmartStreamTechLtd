@@ -1,4 +1,4 @@
-package main.java.domain;
+package domain;
 
 public class Person {
 	int Person_ID;
@@ -43,14 +43,15 @@ public class Person {
 	}
 	public String toString(){
 		return ( getPerson_ID() +
-				"," + 
+				",'" + 
 				getFirst_Name() +
-				"," +
+				"','" +
 				getLast_Name() +
-				"," +
+				"','" +
 				getStreet() +
-				"," + 
-				getCity());
+				"','" + 
+				getCity() +
+				"'");
 	}
 	/**
 	 * @param args

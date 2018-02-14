@@ -60,4 +60,8 @@ build/
 
 .project
 .classpath
+Orders/log/log1.dat
+Orders/
+file.debug.info
+
 
