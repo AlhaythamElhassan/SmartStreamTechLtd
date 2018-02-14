@@ -79,7 +79,7 @@ public class Database {
 		}
 	}
 /**
- * Gets a connection properties specified in the file database.properties.
+ * Gets a connection
  * @return the database connection
  * @throws SQLException 
  */

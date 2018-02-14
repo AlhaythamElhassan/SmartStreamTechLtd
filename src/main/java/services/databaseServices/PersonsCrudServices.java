@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.hamcrest.core.IsInstanceOf;
 
 import database.Database;
+import domain.Order;
 import domain.Person;
 import services.files.ReaderWriter;
 
@@ -101,6 +102,13 @@ public class PersonsCrudServices implements CrudServices {
 							resultSet.getObject(3).toString(),
 							resultSet.getObject(4).toString(),
 							resultSet.getObject(5).toString()));
+				}
+				if (tableName == "Orders") {
+					records.add(new Order(
+							Integer.parseInt(resultSet.getObject(1).toString()),
+							Integer.parseInt(resultSet.getObject(2).toString()),
+							Integer.parseInt(resultSet.getObject(3).toString())
+					));
 				}
 			}
 			finddAllOpStatus = true; 

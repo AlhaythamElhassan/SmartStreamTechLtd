@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import domain.Order;
 import domain.Person;
  
 
@@ -49,10 +50,7 @@ public class ReaderWriter {
 		for (Person person: personRecords)
 			System.out.println(person.toString());
 	}
-	/**
-	 * 
-	 * @return 
-	 * @return 
+	/** 
 	 * @return ArrayList of records found in the file
 	 */
 	public ArrayList<Person> readFile() {
@@ -88,5 +86,33 @@ public class ReaderWriter {
 		}
 		return null;
 	}
-}
+	
+	public ArrayList<Order> readFile(String delimiter) {
+		ArrayList<Order> records = new ArrayList<Order>();
+		try {
+			Scanner in = new Scanner(new FileInputStream(this.fileName), "UTF-8");
+			in.nextLine();
+			while(in.hasNext()) {
+				Order orderRecord = mapLineToRecord(in.nextLine(), delimiter);
+				if (orderRecord != null)
+					records.add(orderRecord);
+			}
+			in.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Error reading File " + this.fileName);
+			e.printStackTrace();
+		}
+		return records;
+		
+	}
 
+
+
+	private Order mapLineToRecord(String line, String delimiter) {
+		String[] fields = line.split(delimiter);
+		if(fields.length > 1) {
+			return new Order(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]));
+		}
+		return null;
+	}
+}
