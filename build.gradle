@@ -15,9 +15,9 @@ jar {
     version =  '1.0.0' // first application version
 }
 
-//mainClassName = "main.java.application.OrdersApplication"
+mainClassName = "application.OrdersApplication"
 //mainClassName = "database.Database"
-mainClassName = "services.databaseServices.PersonsCrudServices"
+//mainClassName = "services.databaseServices.PersonsCrudServices"
 
 buildscript {
     repositories {
