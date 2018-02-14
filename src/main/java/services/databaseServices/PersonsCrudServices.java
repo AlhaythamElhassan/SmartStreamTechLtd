@@ -86,6 +86,7 @@ public class PersonsCrudServices implements CrudServices {
 
 	@Override
 	public ArrayList<Object> findAll(String tableName) {
+		boolean finddAllOpStatus = false;
 		ArrayList<Object> records = new ArrayList<Object>();
 		try {
 			System.out.println("Trying to find all records in table " + tableName);
@@ -93,15 +94,21 @@ public class PersonsCrudServices implements CrudServices {
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int columnCount = metaData.getColumnCount();
 			while(resultSet.next()) {
-				for (int i = 1; i < columnCount; i++) {
-					System.out.println(resultSet.getObject(i));
+				if (tableName == "Persons") {
+					records.add(new Person(
+							Integer.parseInt(resultSet.getObject(1).toString()),
+							resultSet.getObject(2).toString(),
+							resultSet.getObject(3).toString(),
+							resultSet.getObject(4).toString(),
+							resultSet.getObject(5).toString()));
 				}
 			}
+			finddAllOpStatus = true; 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("error in finding records from table  " + tableName);
 			e.printStackTrace();
 		}
-		System.out.println();
+		System.out.println("find all operation status is " + finddAllOpStatus);
 		return records;
 	}
 
