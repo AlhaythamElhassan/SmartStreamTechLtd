@@ -28,7 +28,7 @@ public class OrdersApplication {
 						ordersWithFirstNameOfCorrespondingPerson;
 		
 		services.setDatabase(new Database());
-		// connect to the db 
+		// connect to the database 
 		services.getDatabase().connectToDb();
 		// create table Persons
 		System.out.println("########################################################");
