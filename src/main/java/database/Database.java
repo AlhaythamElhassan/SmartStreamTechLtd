@@ -3,26 +3,34 @@ package database;
 import java.sql.*;
 
 /**
- * This component is responsible from connecting The program to the database
- * @author alhaytham
- * Before instantiating this class one have to make sure database 
- * service is running or otherwise the program will quite with a 
- * message and this statement is one of the test cases
+ * @author alhaytham This component is responsible from connecting The program
+ *         to the database Before instantiating this class one have to make sure
+ *         database service is running or otherwise the program will quite with
+ *         a message and this statement is one of the test cases
  */
 public class Database {
-	
+
 	Statement statement;
 	String dbName = "Orders";
-	private String url = "jdbc:derby://localhost:1527/" + dbName + ";create=true";
+	int portNumber = 1527;
+	private String url = "jdbc:derby://localhost:" + portNumber + "/" + dbName + ";create=true";
 	private String userName = "app";
 	private String password = "seceret";
-	
+
 	public static void main(String[] args) {
 		System.out.println("Logging form class database.Database");
 		Database ordersDb = new Database();
 		ordersDb.connectToDb();
 	}
-	
+
+	public int getPortNumber() {
+		return portNumber;
+	}
+
+	public void setPortNumber(int portNumber) {
+		this.portNumber = portNumber;
+	}
+
 	public Statement getStatement() throws SQLException {
 		return this.getConnection().createStatement();
 	}
@@ -62,13 +70,18 @@ public class Database {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-		
+
+	/**
+	 * This method connect to the database instant and set the statement field to a
+	 * newly created Statement or exit the application with a message
+	 */
 	public void connectToDb() {
-		Connection dbConn; 
+		Connection dbConn;
 		try {
-			dbConn = getConnection(); 
+			dbConn = getConnection();
 			try {
 				this.statement = dbConn.createStatement();
+				System.out.println("connected successfully to database" + getDbName());
 			} catch (SQLException e) {
 				System.out.println("Internal SQL error");
 			}
@@ -78,13 +91,17 @@ public class Database {
 			System.exit(0);
 		}
 	}
-/**
- * Gets a connection
- * @return the database connection
- * @throws SQLException 
- */
+
+	/**
+	 * Gets a connection to a database using url, userName and password fields of
+	 * this class
+	 * 
+	 * @return the database connection
+	 * @throws SQLException
+	 *             if couldn't get the connection instant
+	 */
 	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(this.url,this.userName, this.password);
+		return DriverManager.getConnection(this.url, this.userName, this.password);
 	}
 
 }

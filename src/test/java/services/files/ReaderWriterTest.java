@@ -22,11 +22,11 @@ public class ReaderWriterTest {
 	@Test
 	public void testreadFileReturnNotNullObject() {
 		// The return type is an ArrayList of Person
-		ArrayList<Person> outputRecords = new ArrayList<Person>();
+		ArrayList<Object> outputRecords = new ArrayList<Object>();
 		// The input is a file name 
 		String inputFile = "src/main/resources/Person.data";
 		// instantiate a ReadWriter object using inputFile String
-		ReaderWriter readerWriter = new ReaderWriter(inputFile);
+		FileReader readerWriter = new FileReader(inputFile);
 		outputRecords = readerWriter.readFile();
 		// now application have to assert that the output an
 		// ArrayList that is not null 
@@ -36,18 +36,18 @@ public class ReaderWriterTest {
 	public void mapLineToRecordConverstCsvToPersonObject() {
 		String line = "1,Ola,Hansen,Timoteivn,Sandnes";
 		String expectedOutPut = "1,'Ola','Hansen','Timoteivn','Sandnes'";
-		ReaderWriter readerWriter = new ReaderWriter();
+		FileReader readerWriter = new FileReader();
 		Person person = readerWriter.mapLineToRecord(line);
 		assertEquals(person.toString(), expectedOutPut);
 	}
 	@Test
 	public void testreadFileIsReturningTheRightData() {
 		// The return type is an ArrayList of Person
-		ArrayList<Person> outputRecords = new ArrayList<Person>();
+		ArrayList<Object> outputRecords = new ArrayList<Object>();
 		// The input is a file name 
 		String inputFile = "src/main/resources/Person.data";
 		// instantiate a ReadWriter object using inputFile String
-		ReaderWriter readerWriter = new ReaderWriter(inputFile);
+		FileReader readerWriter = new FileReader(inputFile);
 		outputRecords = readerWriter.readFile();
 		assertEquals(outputRecords.get(0).toString(), "1,'Ola','Hansen','Timoteivn','Sandnes'");
 		assertEquals(outputRecords.get(1).toString(), "2,'Tove','Svendson','Borgvn','Stavanger'");
@@ -56,7 +56,7 @@ public class ReaderWriterTest {
 	@Test
 	public void TestThatsetFileNameIsSettingTheField() {
 		String fileName = "test";
-		ReaderWriter readerWriter = new ReaderWriter();
+		FileReader readerWriter = new FileReader();
 		readerWriter.setFileName(fileName);
 		assertEquals(fileName, readerWriter.getFileName());
 	}
