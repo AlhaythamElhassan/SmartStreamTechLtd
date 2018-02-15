@@ -3,7 +3,7 @@ package database;
 import java.sql.*;
 
 /**
- * 
+ * This component is responsible from connecting The program to the database
  * @author alhaytham
  * Before instantiating this class one have to make sure database 
  * service is running or otherwise the program will quite with a 
@@ -15,7 +15,13 @@ public class Database {
 	String dbName = "Orders";
 	private String url = "jdbc:derby://localhost:1527/" + dbName + ";create=true";
 	private String userName = "app";
-	private String password = "secetet";
+	private String password = "seceret";
+	
+	public static void main(String[] args) {
+		System.out.println("Logging form class database.Database");
+		Database ordersDb = new Database();
+		ordersDb.connectToDb();
+	}
 	
 	public Statement getStatement() throws SQLException {
 		return this.getConnection().createStatement();
@@ -56,13 +62,7 @@ public class Database {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println("Logging form class database.Database");
-		Database ordersDb = new Database();
-		ordersDb.connectToDb();
-	}
-	
+		
 	public void connectToDb() {
 		Connection dbConn; 
 		try {
