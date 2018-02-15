@@ -3,39 +3,34 @@ package application;
 import java.util.ArrayList;
 
 import database.Database;
-import domain.Order;
-import domain.Person;
 import services.Filtering.FilteringServices;
-import services.databaseServices.PersonsCrudServices;
-import services.files.ReaderWriter;
-
+import services.databaseServices.CrudServices;
+import services.databaseServices.RecordsCrudServices;
+import services.files.FileReader;
 
 public class OrdersApplication {
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
-		PersonsCrudServices services = new PersonsCrudServices();
-		FilteringServices filteringServices = new FilteringServices(); 
+		CrudServices services = new RecordsCrudServices();
+		FilteringServices filteringServices = new FilteringServices();
 		String inputDataFile = "src/main/resources/Person.data";
-		ReaderWriter fileReaderWriter = new ReaderWriter(inputDataFile);
-		ArrayList<Person> personRecords = fileReaderWriter.readFile();
+		FileReader fileReaderWriter = new FileReader(inputDataFile);
+		ArrayList<Object> personRecords = fileReaderWriter.readFile();
 		fileReaderWriter.setFileName("src/main/resources/Order.data");
-		ArrayList<Order> ordersRecords = fileReaderWriter.readFile("\\|");
-		ArrayList<Object> retrievedPersonRecords,
-						retrievedOrderRecords,
-						personsWithAtLeastOneOrder,
-						ordersWithFirstNameOfCorrespondingPerson;
-		
+		ArrayList<Object> ordersRecords = fileReaderWriter.readFile("\\|");
+		ArrayList<Object> retrievedPersonRecords, retrievedOrderRecords, personsWithAtLeastOneOrder,
+		ordersWithFirstNameOfCorrespondingPerson;
+
 		services.setDatabase(new Database());
-		// connect to the db 
+		// connect to the database
 		services.getDatabase().connectToDb();
 		// create table Persons
 		System.out.println("########################################################");
 		System.out.println("Creating Tables");
 		System.out.println("########################################################");
-		services.createTable("Persons","PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
-		// create table orders 
+		services.createTable("Persons",
+				"PersonId int primary key, firstName varchar(20), lastName varchar(20), Street varchar(20), City varchar(20)");
+		// create table orders
 		services.createTable("Orders", "ORDER_ID int primary key, ORDER_NO int, PERSON_ID int");
 		System.out.println("########################################################");
 		System.out.println("Finished creating tables");
@@ -54,7 +49,7 @@ public class OrdersApplication {
 		retrievedOrderRecords = services.findAll("Orders");
 		System.out.println("########################################################");
 		System.out.println("########################################################");
-		// Printing Person records 
+		// Printing Person records
 		retrievedPersonRecords.forEach(record -> {
 			System.out.println(record.toString());
 		});
@@ -65,8 +60,9 @@ public class OrdersApplication {
 		System.out.println("########################################################");
 		System.out.println("Persons with at least one Order");
 		System.out.println("########################################################");
-		personsWithAtLeastOneOrder = filteringServices.getPersonsWithAtLeastOneOrder(retrievedPersonRecords, retrievedOrderRecords);
-		if(personsWithAtLeastOneOrder != null) {
+		personsWithAtLeastOneOrder = filteringServices.getPersonsWithAtLeastOneOrder(retrievedPersonRecords,
+				retrievedOrderRecords);
+		if (personsWithAtLeastOneOrder != null) {
 			personsWithAtLeastOneOrder.forEach(person -> {
 				System.out.println(person.toString());
 			});
@@ -76,7 +72,8 @@ public class OrdersApplication {
 		System.out.println("########################################################");
 		System.out.println("All Orders with First Name of the corresponding person");
 		System.out.println("########################################################");
-		ordersWithFirstNameOfCorrespondingPerson = filteringServices.getOrdersWithFirstNameOfCorrespondingPerson(retrievedPersonRecords, retrievedOrderRecords);
+		ordersWithFirstNameOfCorrespondingPerson = filteringServices
+				.getOrdersWithFirstNameOfCorrespondingPerson(retrievedPersonRecords, retrievedOrderRecords);
 		if (!ordersWithFirstNameOfCorrespondingPerson.isEmpty()) {
 			ordersWithFirstNameOfCorrespondingPerson.forEach(order -> {
 				System.out.println(order.toString());
@@ -94,5 +91,3 @@ public class OrdersApplication {
 	}
 
 }
-
-

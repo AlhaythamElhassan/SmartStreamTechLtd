@@ -1,0 +1,37 @@
+Context
+
+	According to the requirement given in file Software Engineer-Java Assessment.docx that
+	trigger the development of an application in the attached archive zipped folder application.zip.  
+
+Objective
+
+	Following objectives partially achieved starting form a given database that contains
+	tables (PERSON and ORDER) and a JDBC library (JDBC + Driver = API on top of database)
+	by implementing:
+		- Create, Retrieve, Update, and Drop (CRUD) service layer that abstract
+		  functionality of the (JDBC + database driver) API and decouple the 
+		  application  direct dependency on database service. (Implemented not tested)
+		- Service layer that read records from file with different
+		   delimiters (`,` and `|`) (Implemented and tested).
+		- Service layer that do filtering operations on the retrieve collection from 
+		  database as described in Software Engineer-Java Assessment.docx. (Implemented not tested)
+Outputs
+
+	Please follow read me to run the application. All the features were implemented but not all tested.
+	
+outcome
+
+The application meets the all functional requirements but not all non-functional ones. Requirements that are not met are:
+	- Complete unit testing
+	- Documentation
+	- Fully code refactoring and decoupling as much as possible.
+	- The level of abstraction.
+	- Consistent code styling (linting).
+	- Considering a prober TDD or BDD or even both.  
+
+Notes:
+	- After each objective there is a flag that show the status of the objective (i.e. implemented,
+	 tested, not implemented, not tested or any combination of former status')
+	- project developed using Eclipse IDE, Gradle automation build tool, local git remotely hosted by GitHub and
+	  continuous integration server hosted by CircleCi.
+	   
