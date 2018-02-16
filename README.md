@@ -13,6 +13,7 @@ The project read data from two files `Person.data` and `Order.data` located unde
     this will starts Derby Embedded database server 
 - To run the application issue 
     ```sh 
+    ./gradlew eclipse
     ./gradlew run
 - To run test cases issue 
     ```sh 
